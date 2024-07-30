@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center header">
+                    <h1>Add a new Transaction</h1>
+                </div>
+            </div>
+            <div class="box">
+                <div class="row">
+                    <div class="col-3">
+                        <p class="label">Type</p>
+                    </div>
+                    <div class="col-3">
+                        <select id="transactionType">
+                            <option value="Income">Income</option>
+                            <option value="Expense">Expense</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <p class="label">Name</p>
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="transactionName">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <p class="label">Amount</p>
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="transactionAmount">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <button onclick="add()">Add to Transactions</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1>Transaction History</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 tbhead">
+                    <p>Type</p>
+                </div>
+                <div class="col-2 tbhead">
+                    <p>Name</p>
+                </div>
+                <div class="col-2 tbhead">
+                    <p>Amount</p>
+                </div>
+                <div class="col-2 tbhead">
+                    <p>Options</p>
+                </div>
+            </div>
+            <div class="row" id="transactionHistory">
+                <!-- Transaction entries will be appended here -->
+            </div>
+        </div>
+    </section>
+    <script>
+        function add() {
+            // Get values from input fields
+            const type = document.getElementById('transactionType').value;
+            const name = document.getElementById('transactionName').value;
+            const amount = document.getElementById('transactionAmount').value;
+            
+            // Create a new row for the transaction
+            const transactionRow = document.createElement('div');
+            transactionRow.className = 'row';
+
+            // Create and append the type element
+            const typeElement = document.createElement('div');
+            typeElement.className = 'col-2';
+            typeElement.innerHTML = `<p>${type}</p>`;
+            transactionRow.appendChild(typeElement);
+
+            // Create and append the name element
+            const nameElement = document.createElement('div');
+            nameElement.className = 'col-2';
+            nameElement.innerHTML = `<p>${name}</p>`;
+            transactionRow.appendChild(nameElement);
+
+            // Create and append the amount element
+            const amountElement = document.createElement('div');
+            amountElement.className = 'col-2';
+            amountElement.innerHTML = `<p>${amount}</p>`;
+            transactionRow.appendChild(amountElement);
+
+            // Create and append the options element with delete button
+            const optionsElement = document.createElement('div');
+            optionsElement.className = 'col-2';
+            optionsElement.innerHTML = `<p><button onclick="deleteRow(this)">Delete</button></p>`;
+            transactionRow.appendChild(optionsElement);
+
+            // Append the new row to the transaction history
+            document.getElementById('transactionHistory').appendChild(transactionRow);
+        }
+
+        function deleteRow(button) {
+            // Remove the transaction row
+            button.closest('.row').remove();
+        }
+    </script>
+</body>
+</html>
